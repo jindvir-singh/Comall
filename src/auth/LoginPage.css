@@ -1,0 +1,64 @@
+/* Login Container */
+.login-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - 80px); /* Subtract the header height (80px) dynamically */
+    overflow: hidden; /* Ensures spinning elements don't overflow the container */
+    perspective: 1000px;
+  }
+  
+  /* Login Form */
+  .login-form {
+    position: relative;
+    z-index: 2; /* Bring the form in front of the moving elements */
+    width: 100%;
+    max-width: 400px;
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  }
+  
+  .login-form h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  /* Input Fields */
+  .login-form input {
+    width: 90%;
+    padding: 10px;
+    margin: 10px 10px 10px 0px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+  }
+  
+  .login-form input:focus {
+    outline: none;
+    border-color: #007FFF;
+    box-shadow: 0 0 5px #007FFF;
+  }
+  
+  /* Button Styles */
+  .login-form button {
+    width: 95%;
+    padding: 10px;
+    margin-top: 24px;
+    background-color: #007FFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .login-form button:hover {
+    background-color: #005bb5; /* Darker shade for hover effect */
+  }
+  
+  

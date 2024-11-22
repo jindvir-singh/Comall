@@ -1,0 +1,231 @@
+/* Dashboard Container */
+.dashboard-container {
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+  }
+  
+  /* Header */
+  .header {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.247);
+    color: white;
+    align-items: center;
+  }
+  
+  .header .logo p {
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  .header .user-info {
+    display: flex;
+    align-items: center;
+  }
+  
+  .header .profile-img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+  
+  .header .user-details {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .header .settings-btn {
+    margin-top: 5px;
+    background-color: transparent;
+    border: 1px solid white;
+    color: white;
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+  
+  .header .settings-btn:hover {
+    background-color: white;
+    color: #007fff;
+  }
+  
+  /* Main Content */
+  .main-content {
+    display: flex;
+    height: 100%;
+    padding: 20px;
+    justify-content: space-between;
+  }
+  
+  .left-section {
+    width: 30%;
+    background: rgba(255, 255, 255, 0.247);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .left-section h3 {
+    margin-bottom: 15px;
+  }
+  
+  .search-bar {
+    padding: 10px;
+    width: 100%;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .friend-list {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .friend-item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #fff;
+    border-radius: 5px;
+  }
+  
+  .friend-item .friend-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+  
+  .add-friend-btn {
+    margin-left: auto;
+    background-color: #007fff;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .add-friend-btn:hover {
+    background-color: #005bb5;
+  }
+  
+  /* Chat List */
+  .chat-list {
+    margin-top: 20px;
+  }
+  
+  .chat-list-items {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .chat-list-item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .chat-list-item:hover {
+    background-color: #007fff;
+    color: white;
+  }
+  
+  .right-section {
+    width: 65%;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .chat-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .chat-header img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+  
+  .chat-header .call-buttons button {
+    background-color: #007fff;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .chat-header .call-buttons button:hover {
+    background-color: #005bb5;
+  }
+  
+  .chat-window {
+    max-height: 400px;
+    overflow-y: auto;
+    margin-bottom: 20px;
+  }
+  
+  .message {
+    background-color: #f1f1f1;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+  }
+  
+  .message.sent {
+    background-color: #007fff;
+    color: white;
+    align-self: flex-end;
+  }
+  
+  .message.received {
+    background-color: #e1e1e1;
+  }
+  
+  .message span {
+    font-size: 0.8rem;
+    color: #aaa;
+  }
+  
+  .message-input {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .message-input input {
+    padding: 10px;
+    width: 80%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .message-input button {
+    background-color: #007fff;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 10px;
+  }
+  
+  .message-input button:hover {
+    background-color: #005bb5;
+  }
+  

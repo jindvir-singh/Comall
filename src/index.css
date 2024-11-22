@@ -5,6 +5,8 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background: url(./res/comall-back.svg) no-repeat center center/cover;
+
 }
 
 code {
