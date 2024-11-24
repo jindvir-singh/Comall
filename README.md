@@ -1,8 +1,6 @@
-# ![Comall](https://img.icons8.com/ios/452/chat.png) **Comall**
+# ![Comall]**Comall**
 
 [![Version](https://img.shields.io/badge/version-1.0-blue.svg)](https://github.com/yourusername/comall/releases)
-[![License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://opensource.org/licenses/MIT)
-[![Build Status](https://img.shields.io/travis/yourusername/comall.svg)](https://travis-ci.org/yourusername/comall)
 
 > **Comall**: Fast & Reliable Communication for Everyone
 
