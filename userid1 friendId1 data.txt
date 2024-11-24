@@ -1,0 +1,17 @@
+userid1{
+	friendId1{
+	data
+		},
+	friendId2{
+	data
+		}	
+},
+userid2{
+	friendId1{
+	data
+		},
+	friendId2{
+	data
+		}	
+}
+

@@ -13,7 +13,6 @@ function LoginPage() {
 
   const navigate = useNavigate(); // Create navigate function
 
-
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -43,14 +42,13 @@ function LoginPage() {
       });
 
       const result = await response.json();
+      console.log(result)
 
       if (response.ok) {
+        // Save user data to localStorage
+        localStorage.setItem('currentUser', JSON.stringify(result));
         setMessage(`Login successful! Welcome, ${result.username}`);
         navigate('/dashboard');
-
-        // Optionally, you can redirect to a different page upon successful login
-        // For example:
-        // window.location.href = '/dashboard'; // or use a routing library like React Router
       } else {
         setMessage(result.error || 'Login failed. Please try again.');
       }

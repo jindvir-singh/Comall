@@ -1,231 +1,359 @@
 /* Dashboard Container */
 .dashboard-container {
-    font-family: Arial, sans-serif;
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-  }
-  
-  /* Header */
-  .header {
-    display: flex;
-    justify-content: space-between;
-    padding: 20px;
-    background: rgba(255, 255, 255, 0.247);
-    color: white;
-    align-items: center;
-  }
-  
-  .header .logo p {
-    font-size: 24px;
-    font-weight: bold;
-  }
-  
-  .header .user-info {
-    display: flex;
-    align-items: center;
-  }
-  
-  .header .profile-img {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    margin-right: 10px;
-  }
-  
-  .header .user-details {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .header .settings-btn {
-    margin-top: 5px;
-    background-color: transparent;
-    border: 1px solid white;
-    color: white;
-    padding: 5px 10px;
-    cursor: pointer;
-  }
-  
-  .header .settings-btn:hover {
-    background-color: white;
-    color: #007fff;
-  }
-  
-  /* Main Content */
-  .main-content {
-    display: flex;
-    height: 100%;
-    padding: 20px;
-    justify-content: space-between;
-  }
-  
-  .left-section {
-    width: 30%;
-    background: rgba(255, 255, 255, 0.247);
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  .left-section h3 {
-    margin-bottom: 15px;
-  }
-  
-  .search-bar {
-    padding: 10px;
-    width: 100%;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
-  
-  .friend-list {
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  .friend-item {
-    display: flex;
-    align-items: center;
-    padding: 10px;
-    margin-bottom: 10px;
-    background-color: #fff;
-    border-radius: 5px;
-  }
-  
-  .friend-item .friend-avatar {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    margin-right: 10px;
-  }
-  
-  .add-friend-btn {
-    margin-left: auto;
-    background-color: #007fff;
-    color: white;
-    padding: 5px 10px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .add-friend-btn:hover {
-    background-color: #005bb5;
-  }
-  
-  /* Chat List */
-  .chat-list {
-    margin-top: 20px;
-  }
-  
-  .chat-list-items {
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  .chat-list-item {
-    display: flex;
-    align-items: center;
-    padding: 10px;
-    margin-bottom: 10px;
-    background-color: #fff;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .chat-list-item:hover {
-    background-color: #007fff;
-    color: white;
-  }
-  
-  .right-section {
-    width: 65%;
-    padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  .chat-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-  }
-  
-  .chat-header img {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    margin-right: 10px;
-  }
-  
-  .chat-header .call-buttons button {
-    background-color: #007fff;
-    color: white;
-    padding: 5px 10px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .chat-header .call-buttons button:hover {
-    background-color: #005bb5;
-  }
-  
-  .chat-window {
-    max-height: 400px;
-    overflow-y: auto;
-    margin-bottom: 20px;
-  }
-  
-  .message {
-    background-color: #f1f1f1;
-    padding: 10px;
-    margin-bottom: 10px;
-    border-radius: 5px;
-  }
-  
-  .message.sent {
-    background-color: #007fff;
-    color: white;
-    align-self: flex-end;
-  }
-  
-  .message.received {
-    background-color: #e1e1e1;
-  }
-  
-  .message span {
-    font-size: 0.8rem;
-    color: #aaa;
-  }
-  
-  .message-input {
-    display: flex;
-    justify-content: space-between;
-  }
-  
-  .message-input input {
-    padding: 10px;
-    width: 80%;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
-  
-  .message-input button {
-    background-color: #007fff;
-    color: white;
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-left: 10px;
-  }
-  
-  .message-input button:hover {
-    background-color: #005bb5;
-  }
-  
+  font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: row; /* Align the left and right sections side by side */
+  height: 100vh;
+  overflow-y: hidden;
+}
+
+/* Header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.247);
+  color: white;
+  align-items: center;
+  position: fixed; /* Keep the header fixed at the top */
+  width: 100%;
+  z-index: 10; /* Ensure it's above other content */
+}
+
+.header .logo p {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.header .user-info {
+  display: flex;
+  align-items: center;
+}
+
+.header .profile-img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.header .user-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.header .settings-btn {
+  margin-top: 5px;
+  background-color: transparent;
+  border: 1px solid white;
+  color: white;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.header .settings-btn:hover {
+  background-color: white;
+  color: #007fff;
+}
+
+/* Toggle button styling */
+.toggle-btn {
+  background-color: #ffffff;
+  color: #000;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1em;
+  margin-right: 12px;
+}
+
+.toggle-btn.active {
+  background-color: #007bff;
+  color: white;
+}
+
+.toggle-btn:hover {
+  background-color: #0056b3;
+  color: white;
+}
+
+/* Left Sidebar (Left Section) */
+.left-sidebar {
+  margin-top: 6.5%;
+  margin-left: 2%;
+  width: 25%; /* Fixed width for left sidebar */
+  background: rgba(255, 255, 255, 0.247);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  position: relative;
+  max-height: 80vh;
+
+}
+
+.left-section {
+  overflow-y: scroll;
+}
+
+.left-section::-webkit-scrollbar {
+  display: none;
+}
+
+.left-section {
+  scrollbar-width: none;
+}
+
+.left-section {
+  -ms-overflow-style: none;
+}
+
+.left-section h3 {
+  margin-bottom: 15px;
+}
+
+.search-bar {
+  padding: 10px;
+  width: 95%;
+  margin-top: 5%;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.pending-buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.friend-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.friend-item {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+  background-color: #fff;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.details {
+  margin-bottom: 10px;
+}
+
+.details p {
+  margin-bottom: 12px;
+}
+
+.username,
+.email {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 5px 0;
+}
+
+.detail-icon {
+  color: #007bff;
+  font-size: 1.2em;
+  flex-shrink: 0;
+}
+
+.text {
+  margin-left: auto;
+  text-align: right;
+  font-size: 1em;
+}
+
+.add-friend-btn {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100%;
+  font-size: 1em;
+  text-align: center;
+}
+
+.add-friend-btn:hover {
+  background-color: #0056b3;
+}
+
+/* Right Sidebar (Right Section) */
+.right-section {
+  margin-top: 6.5%;
+  margin-left: 2%;
+  width: 65%; /* Fixed width for left sidebar */
+  background: rgba(255, 255, 255, 0.247);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  position: relative;
+  max-height: 80vh;
+}
+
+/* Chat Section */
+/* Ensure the icons align properly */
+.chat-header .user-info {
+  display: flex;
+  align-items: center;
+}
+
+.chat-header .user-details {
+  display: flex;
+  align-items: center;
+}
+
+.chat-header .status-info {
+  display: flex;
+  align-items: center;
+  margin-left: 10px;
+}
+
+/* Icon styles */
+.chat-header .detail-icon {
+  font-size: 30px; /* Increase size of user icon */
+  margin-right: 10px; /* Space between icon and text */
+}
+
+.chat-header .username {
+  font-size: 1.5rem; /* Increase font size of username */
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.chat-header .status-icon {
+  font-size: 12px;
+  color: green; /* Green color for "Online" status */
+  margin-right: 5px;
+}
+
+.chat-header .status {
+  font-size: 1rem;
+  color: #4caf50; /* Green color for online status */
+}
+
+/* Adjust the call and video buttons */
+.call-buttons {
+  display: flex;
+  justify-content: center; /* Align buttons to the right */
+  gap: 15px; /* Add space between buttons */
+}
+
+.call-buttons button {
+  background-color: #007fff;
+  color: white;
+  padding: 15px; /* Adjust padding to make the buttons look better */
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Ensure space between icon and text inside button */
+}
+
+.call-buttons button:hover {
+  background-color: #005bb5;
+}
+
+.chat-window{
+  margin-top: 2%;
+}
+
+.message {
+  background-color: #f1f1f1;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
+
+/* Sent Message (Right Side) */
+
+
+/* Chat Window */
+.chat-window {
+  max-height: 400px;
+  overflow-y: auto;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column; /* Ensures the messages are stacked vertically */
+}
+
+/* Sent Message (Right Side) */
+.message.sent {
+  background-color: #007fff;
+  color: white;
+  align-self: flex-end; /* Aligns the sent message to the right */
+  border-radius: 16px 16px 0px 16px;
+  width: fit-content; /* Adjusts the width based on the message content */
+  padding: 4px 16px;
+  margin-right: 10px; /* Adds space to the right */
+  max-width: 75%; /* Optional: Ensures the message doesn't take up too much space */
+  display: flex;
+  flex-direction: row; /* Aligns content in a row */
+  justify-content: flex-end; /* Aligns content to the right */
+}
+
+/* Received Message (Left Side) */
+.message.received {
+  background-color: #000000;
+  color: rgb(255, 255, 255);
+  align-self: flex-start; /* Aligns the received message to the left */
+  border-radius: 16px 16px 16px 0px;
+  width: fit-content; /* Adjusts the width based on the message content */
+  padding: 4px 16px;
+  margin-left: 10px; /* Adds space to the left */
+  max-width: 75%; /* Optional: Ensures the message doesn't take up too much space */
+  display: flex;
+  flex-direction: row; /* Aligns content in a row */
+  justify-content: flex-start; /* Aligns content to the left */
+}
+
+/* Timestamp for Messages */
+.message span {
+  font-size: 0.8rem;
+  color: #ffffff;
+  margin: 10px; /* Adds space between the text and timestamp */
+  align-self: flex-end; /* Aligns the timestamp at the bottom of the message */
+}
+
+
+.message-input {
+  display: flex;
+  justify-content: space-between;
+}
+
+.message-input input {
+  padding: 10px;
+  width: 80%;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.message-input button {
+  background-color: #007fff;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.message-input button:hover {
+  background-color: #005bb5;
+}
