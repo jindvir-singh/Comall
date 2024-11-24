@@ -1,4 +1,4 @@
-# ![Comall]**Comall**
+**Comall**
 
 [![Version](https://img.shields.io/badge/version-1.0-blue.svg)](https://github.com/yourusername/comall/releases)
 
