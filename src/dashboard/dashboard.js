@@ -13,6 +13,22 @@ function Dashboard() {
   const [messages, setMessages] = useState([]);
   const [messageInput, setMessageInput] = useState("");
   const chatWindowRef = useRef(null);
+  const [isInCall, setIsInCall] = useState(false); // State to control video container visibility
+
+  const [localStream, setLocalStream] = useState(null);
+  const [remoteStream, setRemoteStream] = useState(null);
+  const peerConnectionRef = useRef(null); // Reference for RTCPeerConnection
+  const localVideoRef = useRef(null);
+  const remoteVideoRef = useRef(null);
+
+  const configuration = {
+    iceServers: [
+      {
+        urls: "stun:stun.l.google.com:19302", // Google's public STUN server
+      },
+    ],
+  };
+  const peerConnection = new RTCPeerConnection(configuration);
 
   // Get current logged-in user from localStorage
   const currentUser = JSON.parse(localStorage.getItem("currentUser"));
@@ -21,6 +37,81 @@ function Dashboard() {
 
   console.log(currentUserId);
 
+  const handleVideoCall = async (friendId) => {
+    setIsInCall(true); // Show the video container
+
+    try {
+      // Get local media stream
+      const stream = await navigator.mediaDevices.getUserMedia({
+        video: true,
+        audio: true,
+      });
+      setLocalStream(stream);
+
+      // Display local stream
+      if (localVideoRef.current) {
+        localVideoRef.current.srcObject = stream;
+      }
+
+      // Create and configure RTCPeerConnection
+      const peerConnection = new RTCPeerConnection(configuration);
+      peerConnectionRef.current = peerConnection;
+
+      // Add local stream tracks to peer connection
+      stream
+        .getTracks()
+        .forEach((track) => peerConnection.addTrack(track, stream));
+
+      // Handle ICE candidates
+      peerConnection.onicecandidate = (event) => {
+        if (event.candidate) {
+          socket.emit("signal", {
+            to: friendId,
+            from: currentUserId,
+            candidate: event.candidate,
+          });
+        }
+      };
+
+      // Handle remote stream
+      peerConnection.ontrack = (event) => {
+        setRemoteStream(event.streams[0]);
+        if (remoteVideoRef.current) {
+          remoteVideoRef.current.srcObject = event.streams[0];
+        }
+      };
+
+      // Create and send offer
+      const offer = await peerConnection.createOffer();
+      await peerConnection.setLocalDescription(offer);
+
+      socket.emit("signal", {
+        to: friendId,
+        from: currentUserId,
+        offer,
+      });
+    } catch (error) {
+      console.error("Error initiating video call:", error);
+    }
+  };
+  const handleEndCall = () => {
+    setIsInCall(false); // Hide the video container
+
+    // Close peer connection
+    const peerConnection = peerConnectionRef.current;
+    if (peerConnection) {
+      peerConnection.close();
+      peerConnectionRef.current = null;
+    }
+
+    // Stop local media tracks
+    if (localStream) {
+      localStream.getTracks().forEach((track) => track.stop());
+      setLocalStream(null);
+    }
+
+    setRemoteStream(null);
+  };
   // Function to fetch all users
   const fetchAllUsers = async () => {
     try {
@@ -176,6 +267,50 @@ function Dashboard() {
     // Cleanup when the component unmounts
     return () => {
       socket.disconnect();
+    };
+  }, [currentUserId]);
+
+  useEffect(() => {
+    // Initialize Socket.IO connection
+    const newSocket = io("http://localhost:8080");
+    setSocket(newSocket);
+
+    // Register the user for signaling
+    newSocket.emit("register", currentUserId);
+
+    // Handle incoming signaling data
+    newSocket.on("signal", async (data) => {
+      const { from, offer, answer, candidate } = data;
+
+      const peerConnection = peerConnectionRef.current;
+
+      if (offer) {
+        // Handle incoming offer
+        await peerConnection.setRemoteDescription(
+          new RTCSessionDescription(offer)
+        );
+        const answer = await peerConnection.createAnswer();
+        await peerConnection.setLocalDescription(answer);
+
+        // Send answer back
+        newSocket.emit("signal", {
+          to: from,
+          from: currentUserId,
+          answer,
+        });
+      } else if (answer) {
+        // Handle incoming answer
+        await peerConnection.setRemoteDescription(
+          new RTCSessionDescription(answer)
+        );
+      } else if (candidate) {
+        // Add received ICE candidate
+        await peerConnection.addIceCandidate(new RTCIceCandidate(candidate));
+      }
+    });
+
+    return () => {
+      newSocket.disconnect();
     };
   }, [currentUserId]);
 
@@ -392,6 +527,27 @@ function Dashboard() {
         {selectedFriend ? (
           <>
             {/* Chat Header */}
+
+            {isInCall && (
+              <div className="video-container">
+                <div className="video-wrapper">
+                 
+                  <video
+                    ref={remoteVideoRef}
+                    autoPlay
+                    className="remote-video"
+                  /> 
+                  <video
+                  ref={localVideoRef}
+                  autoPlay
+                  muted
+                  className="local-video"
+                />
+                </div>
+              </div>
+            )}  
+            
+
             <div className="chat-header">
               <div className="user-info">
                 <i className="fas fa-user-circle detail-icon"></i>
@@ -402,9 +558,17 @@ function Dashboard() {
                 <button className="call-btn">
                   <i className="fas fa-phone-alt"></i>
                 </button>
-                <button className="video-btn">
+                <button
+                  className="video-btn"
+                  onClick={() => handleVideoCall(selectedFriend._id)}
+                >
                   <i className="fas fa-video"></i>
                 </button>
+                {isInCall && (
+                  <button onClick={handleEndCall}>
+                    <i className="fas fa-phone-slash"></i>
+                  </button>
+                )}{" "}
               </div>
             </div>
 
